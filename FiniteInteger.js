@@ -39,6 +39,4 @@ class FiniteInteger {
     }
 }
 
-console.log(FiniteInteger.closedInterval(-10, 10))
-
-//export default FiniteInteger;
+export default FiniteInteger;
