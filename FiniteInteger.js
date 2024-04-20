@@ -14,12 +14,11 @@ class FiniteInteger {
         const maximum = isConcise ? _minimum : _maximum;
         
         const difference = maximum - minimum;        
-        const length     = difference + Math.sign(difference);
+        const sign       = Math.sign(difference);
+        const length     = difference + sign;
         const array      = [...Array(length).keys()];
 
-        const offsetInteger 
-            = (integer) => integer + Math.sign(difference) * minimum;
-        
+        const offsetInteger = (integer) => integer + sign * minimum;
         return minimum === 0 ? array : array.map(offsetInteger);
     }
 
