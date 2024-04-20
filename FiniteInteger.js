@@ -22,7 +22,7 @@ class FiniteInteger {
         const maximum = isConcise ? _minimum : _maximum;
         
         const difference = maximum - minimum;        
-        const length     = difference <= 0 ? difference - 1 : difference + 1;
+        const length     = difference + Math.sign(difference);
         const array      = [...Array(length).keys()];
 
         const offsetInteger 
@@ -39,6 +39,6 @@ class FiniteInteger {
     }
 }
 
-console.log(FiniteInteger.closedInterval(1))
+console.log(FiniteInteger.closedInterval(-10, 10))
 
 //export default FiniteInteger;
