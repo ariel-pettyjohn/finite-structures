@@ -1,5 +1,5 @@
-import FiniteSet from './FiniteSet';
-import Util from './Util';
+import FiniteInteger from "./FiniteInteger";
+import FiniteSet     from './FiniteSet';
 
 class FiniteSpace {
     constructor(set = new FiniteSet(), structure = {}) {
@@ -7,16 +7,18 @@ class FiniteSpace {
         this.structure = structure;
     }
 
-    static generateDistinctTopologiesOverBaseSet(baseSet) {
+    // Note: how do these generate the distinct spaces and not all spaces?
+    static generateDistinctTopologicalSpaces(baseSet) {
         return baseSet.powerset.powerset.filter((candidateSet) => {
             const candidateSpace = new FiniteSpace(baseSet, candidateSet);
             return candidateSpace.isTopological;
         });
     }
 
-    static generateDistinctTopologiesOnNPoints(n) {
-        const baseSet = new FiniteSet(Util.range(n));
-        const distinctTopologies = FiniteSpace.generateDistinctTopologiesOverBaseSet(baseSet);
+    static generateDistinctTopologicalSpacesOnNPoints(n) {
+        const baseSet = new FiniteSet(FiniteInteger.closedInterval(1, n));
+        const distinctTopologies 
+            = FiniteSpace.generateDistinctTopologicalSpaces(baseSet);
         return distinctTopologies.toArray;
     }
 
@@ -39,10 +41,8 @@ class FiniteSpace {
     }
 
     get isSystem() {
-        return (
-            this.structure instanceof FiniteSet &&
-            this.structure.every((element) => element.isSubset(this.set))
-        );
+        return this.structure instanceof FiniteSet 
+            && this.structure.every((element) => element.isSubset(this.set));
     }
 
     get isClosedUnderUnion() {
@@ -80,11 +80,9 @@ class FiniteSpace {
     }
 
     get isTopological() {
-        return (
-            this.isLambdaSystem &&
-            this.isPiSystem &&
-            this.structure.contains(FiniteSet.empty)
-        );
+        return this.isLambdaSystem 
+            && this.isPiSystem 
+            && this.structure.contains(FiniteSet.empty);
     }
 
     neighborhoods(point) {
