@@ -1,12 +1,4 @@
 class FiniteInteger {
-    /*
-    static openInterval (infinum, supremum = 1) {
-        if (supremum === 1) {
-            return
-        }
-    }
-    */
-
     static closedInterval (_minimum, _maximum = 0) {    
         const isDegenerate = _maximum === _minimum;
         if (isDegenerate) return [_minimum];
