@@ -9,21 +9,18 @@ class FiniteSet extends Set {
 
     get powerset() {
         const powerset = [[]];
-        this.forEach(function (element) {
-            const currentLength = powerset.length;
-            for (let i = 0; i < currentLength; i++) {
+        this.forEach((element) => {
+            for (let i = 0; i < powerset.length; i++) {
                 powerset.push([...powerset[i], element]);
             }
         });
         return new FiniteSet(powerset.map((openSet) => new FiniteSet(openSet)));
     }
 
-    get combinations() {
-        const source = [...this];
-        const combinations = new FiniteSet(source.flatMap((x, index) => {
-            return source.slice(index + 1).map(y => new FiniteSet([x, y]));
+    get combinations () {
+        return new FiniteSet(this.flatMap((x, index) => {
+            return this.slice(index + 1).map((y) => new FiniteSet([x, y]));
         }));
-        return combinations;
     }
 
     isSubset(superset) {
