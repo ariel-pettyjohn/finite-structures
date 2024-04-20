@@ -3,7 +3,7 @@ import FiniteSet     from './FiniteSet';
 
 class FiniteSpace {
     constructor(set = new FiniteSet(), structure = {}) {
-        this.set = set;
+        this.set       = set;
         this.structure = structure;
     }
 
@@ -45,6 +45,9 @@ class FiniteSpace {
             && this.structure.every((element) => element.isSubset(this.set));
     }
 
+    // TODO: implement isClosedUnderComplement
+
+    // TODO: refactor using every/some
     get isClosedUnderUnion() {
         if (!this.isSystem) return false;
         const structureArray = this.structure.toArray;
@@ -58,6 +61,7 @@ class FiniteSpace {
         return true;
     }
 
+    // TODO: refactor using every/some
     get isClosedUnderIntersection() {
         if (!this.isSystem) return false;
         const structureArray = this.structure.toArray;
@@ -71,6 +75,7 @@ class FiniteSpace {
         return true;
     }
 
+    // TODO: this should be isClosedUnderComplement
     get isLambdaSystem() {
         return this.isClosedUnderUnion && this.structure.contains(this.set);
     }

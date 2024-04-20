@@ -90,10 +90,6 @@ class FiniteSet extends Set {
         return this.reduce((acc, x) => acc.concat(callback(x)), []);
     }
 
-    forEach(...args) {
-        this.toArray.forEach(...args);
-    }
-
     map(...args) {
         return this.toArray.map(...args);
     }
